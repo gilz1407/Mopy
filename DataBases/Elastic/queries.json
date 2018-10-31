@@ -1,0 +1,16 @@
+{
+  "queries":[
+    {
+      "name":"PersonByName",
+      "type":"Person",
+      "query":{
+        "query": {
+          "match":
+          {
+            "name":""
+          }
+        }
+      }
+    }
+  ]
+}
