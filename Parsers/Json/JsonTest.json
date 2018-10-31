@@ -1,0 +1,15 @@
+{
+  "workers": [
+    {
+      "name": "gil zur",
+      "phone": "0544834194",
+      "has_license": false
+    },
+    {
+      "name": "nisan vaknin",
+      "phone": "0524335194",
+      "email": null,
+      "has_license": true
+    }
+  ]
+}

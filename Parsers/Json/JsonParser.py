@@ -1,22 +1,25 @@
 import json
+
 class JsonParser:
     def __init__(self,fileName):
-        self.f = open(fileName)
+        self.fileName=fileName
 
     def FileToDictionary(self):
-        return json.load(self.f)  # to python object (dictionary)
+        f = open(self.fileName)
+        return json.load(f)  # to python object (dictionary)
 
     def FileToString(self):
-        tempDic= json.load(self.f)  # to python dictionary
-        return json.dumps(tempDic)
+        f = open(self.fileName)
+        tempdic=json.load(f)  # to python dictionary
+        return json.dumps(tempdic)
 
     def StringToDictionary(self,jsonStr):
         return json.loads(jsonStr)
 
     def DictionaryToFile(self,dic,filePath):
-        self.toFile = open(filePath)
-        json.dump(str(dic),self.toFile)
+        toFile = open(filePath,'w')
+        json.dump(dic,toFile)
 
     def StringToFile(self,str,filePath):
-        dic=json.loads(str)
-        json.dump(str(dic),filePath)
+        dic=self.StringToDictionary(str)
+        self.DictionaryToFile(dic,filePath)
