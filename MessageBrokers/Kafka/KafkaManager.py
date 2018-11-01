@@ -1,7 +1,7 @@
 from kafka import KafkaProducer
 import config
 
-class KafkaProduce:
+class KafkaManager:
 
     def __init__(self):
         self._producer = KafkaProducer(bootstrap_servers=config.CONFIG['kafka_broker']+":" + config.CONFIG['port'])
