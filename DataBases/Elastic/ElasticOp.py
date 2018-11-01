@@ -3,9 +3,8 @@ from Configurations.cm import Cm
 
 class ElasticOp():
     def __init__(self, index):
-        self.section = 'ElasticSearch'
-        self.conf = Cm().config
-        self.es = Elasticsearch([{'host': self.conf[self.section]['host'], 'port': self.conf[self.section]['port']}])
+        self.conf = Cm().config['ElasticSearch']
+        self.es = Elasticsearch([{'host': self.conf['host'], 'port': self.conf['port']}])
         self.index = index
 
     def GeneralQuery(self, query):

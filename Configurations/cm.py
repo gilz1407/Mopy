@@ -1,6 +1,4 @@
-import io
 import configparser
-
 from gevent import os
 
 
