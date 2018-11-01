@@ -24,71 +24,29 @@ One file called "RedisManager" witch is a wrapper for redis and one example of u
 import redis
 from MessageBrokers.Redis.RedisManager import Listener
 
-def redisTest():
-    r = redis.Redis()
-    client = Listener(r, ['test', 'test2'])
-    client.start()
+#The function get the current item on queue (Tuple-> (ChannelName,Data))
 
+def MyCare(tup):
+    print("Channel: "+str(tup[0])+" Data: "+str(tup[1]))
+
+def redisTest():
+    r = redis.Redis()   # Connecting to localhost redis server.
+    client = Listener(r, ['test', 'test2'],MyCare)  # Create a listener for number of channels on sperate thread.
+    client.start()  # Start listening.
+
+    # Publish different data on number of channels.
     r.publish('gil', 'yeaa')
     r.publish('test', 'this will reach the listener')
     r.publish('test2', 'this will work')
     r.publish('fail', 'this will not')
     r.publish('test', 'KILL')
+
+    # After handling all of the messages from redis - unsubscribe will stop the redis thread
+    client.unsubscribe('test')
+    client.unsubscribe('test2')
 ``` 
-
-
-
-
-Query example:
-```json
-{
-  "queries":[
-    {
-      "name":"PersonByName",
-      "query":{
-        "query": {
-          "match":
-          {
-            "name":""
-          }
-        }
-      }
-    }
-  ]
-}
-```
-
-After the relevant query was added , suitable class needs to be defined on queries folder.
-Structure of the class name {index}_{queryName}:
-
-```python
-from DataBases.Elastic.Entities.Person import Person
-from DataBases.Elastic.IQuery import IQuery
-
-#Person->index  PersonByName->The name of the query
-class Person_PersonByName(IQuery):  
-
-    def __init__(self):
-        super().__init__(self.__class__)
-
-    def SetPersonName(self,name):
-        self.query["query"]["match"]["name"]=name
-
-    def Query(self):
-        res=self.op.GeneralQuery(self.query)
-        return Person.Deserialize(res)
-```
-  Tם your attention: "Query" method must be implemented. 
-        
-In order to get the query result as object:
-1. Every entity needs to implement IEntity and as a result implement 
-    ```python
-    @classmethod
-    def Deserialize(cls,data):
-        tempPerson =cls(data["name"])
-        return tempPerson
-     ``` 
-   The method above takes the Json response from the elastic query and creates object from the suitable class "Person"
+Every test can define the function that will take processing messages from redis.
+In order to kill the redis thread unsubscribe from all channels is needed.
 
 **Author**
 Gil zur
