@@ -1,0 +1,14 @@
+{
+  "queries":[
+    {
+      "name":"MatchByKey",
+      "index":"",
+      "type":"",
+      "query":{
+        "query": {
+          "match": {}
+        }
+      }
+    }
+  ]
+}
