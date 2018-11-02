@@ -2,8 +2,8 @@
   "queries":[
     {
       "name":"MatchByKey",
-      "index":"",
-      "type":"",
+      "index":"Person",
+      "type":"Person",
       "query":{
         "query": {
           "match": {}

@@ -8,8 +8,7 @@ class ElasticOp():
         self.index = index
 
     def GeneralQuery(self, query):
-        res = self.es.search(index=self.index, body=query)
-        return res
+        return self.es.search(index=self.index, body=query)
 
 
 
