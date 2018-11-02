@@ -9,9 +9,3 @@ class MatchByKey(IQuery):
     def setKeyValue(self,tuple):
         match=self.queryItem["query"]["match"]
         match.update({tuple[0]:tuple[1]})
-       # print("Updated value: "+self.queryItem)
-
-
-match=MatchByKey()
-match.setKeyValue(("id","gil"))
-match.Query()

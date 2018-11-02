@@ -1,10 +1,9 @@
-from DataBases.Elastic.queries.PersonByName import Person_PersonByName
-
+from DataBases.Elastic.queries.MatchByKey import MatchByKey
 
 def TestAskForPerson():
-    p=Person_PersonByName()
-    p.SetPersonName("Gil")
-    p.Query()
+    match = MatchByKey()
+    match.setKeyValue(("id", "gil"))
+    match.Query()
 
 
 TestAskForPerson()
