@@ -1,30 +1,27 @@
 from marshmallow import Schema, fields, post_load
-
-from DataBases.Elastic.ElasticOp import ElasticOp
-
+from Connections.Rest.RestManager import RestManager
 
 class RequestSchema(Schema):
     def __init__(self,data):
         super(RequestSchema, self).__init__()
-        self.requestName=data["name"]
+        self.name=data["name"]
         self.type = data["type"]
         self.url = data["url"]
-        self.json = data["json"]
+        self.js = data["js"]
         self.data = data["data"]
+        self.dataItem = data
+        self.rest=RestManager()
 
-    requestName = fields.Str()
+    name = fields.Str()
     type = fields.Str()
     url = fields.Str()
-    json = fields.Dict()
-    data = fields.Dict()
+    js = fields.Dict()
+    data = fields.Str()
 
     @post_load
     def make_obj(self,data=None):
-        op=ElasticOp(self.index)
-        op.GeneralQuery(self.query)
-        i = __import__('DataBases.Elastic.Entities.'+self.data['type'])
-        i = getattr(i,'Elastic')
-        module = getattr(i, 'Entities')
-        cs = getattr(module, self.data['type'])
-        cs = getattr(cs, self.data['type'])
-        return cs(**self.data)
+        switcher = {
+                "post": self.rest.Post(self.dataItem),
+                "get": self.rest.Get(self.dataItem)
+            }
+        return switcher.get(self.type)

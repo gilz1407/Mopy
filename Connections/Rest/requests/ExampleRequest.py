@@ -6,6 +6,15 @@ class ExampleRequest(IRequests):
         super(ExampleRequest,self).__init__()
 
 
-    def setKeyValue(self,tuple):
-        match=self.queryItem["query"]["match"]
-        match.update({tuple[0]:tuple[1]})
+    def SetPetName(self,name):
+        self.requestItem["js"]["name"]=name
+
+    def SetCategoryName(self,name):
+        self.requestItem["js"]["category"]["name"] = name
+
+    def SetTagName(self,tagName):
+        self.requestItem["js"]["tags"][0]["name"] = tagName
+
+    def SetId(self,id):
+        self.requestItem["js"]["id"] = id
+        self.requestItem["js"]["tags"][0]["id"] = id

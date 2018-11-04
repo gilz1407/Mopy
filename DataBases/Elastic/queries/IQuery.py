@@ -26,3 +26,4 @@ class IQuery:
         self.schema.load(self.queryItem)
 
 
+

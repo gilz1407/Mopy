@@ -1,6 +1,16 @@
 from Connections.Rest.RestManager import RestManager
+from Connections.Rest.requests.ExampleRequest import ExampleRequest
 
 
 def RestExample():
-    rest = RestManager()
-    rest.Post("exampleRequest")
+    er =ExampleRequest()
+
+    er.SetCategoryName("newCategory")
+    er.SetId(12)
+    er.SetPetName("Nisui")
+    er.SetTagName("MyPets")
+
+    res = er.Request()
+    print (res)
+
+RestExample()
