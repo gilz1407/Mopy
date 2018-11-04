@@ -12,3 +12,6 @@ redis==2.10.6
 requests==2.20.0
 urllib3==1.24
 marshmallow==3.0.0
+#Quick start for YouTube api
+#pip install --upgrade google-api-python-client
+#pip install --upgrade google-auth google-auth-oauthlib google-auth-httplib2
