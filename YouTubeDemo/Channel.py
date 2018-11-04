@@ -1,13 +1,12 @@
 import http
 import random
 from datetime import time
-
-
 import httplib2
 from googleapiclient.errors import HttpError
 from googleapiclient.http import MediaFileUpload
-from AuthenticatedService import get_authenticated_service
-from Helper import remove_empty_kwargs, build_resource, print_response
+
+from YouTubeDemo.AuthenticatedService import get_authenticated_service
+from YouTubeDemo.Helper import build_resource, print_response
 
 RETRIABLE_STATUS_CODES = [500, 502, 503, 504]
 RETRIABLE_EXCEPTIONS = (httplib2.HttpLib2Error, IOError, http.client.NotConnected,
