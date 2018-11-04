@@ -1,6 +1,4 @@
-from Connections.Rest.RestManager import RestManager
 from Connections.Rest.requests.ExampleRequest import ExampleRequest
-
 
 def RestExample():
     er =ExampleRequest()
