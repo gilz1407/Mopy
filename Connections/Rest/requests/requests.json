@@ -1,0 +1,11 @@
+{
+  "requests":[
+    {
+      "name":"exampleRequest",
+      "type":"post",
+      "url":"",
+      "json":"",
+      "data":""
+    }
+  ]
+}

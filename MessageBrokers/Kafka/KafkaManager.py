@@ -10,5 +10,5 @@ class KafkaManager:
         try:
             self._producer.send('test', text_to_send)
             self._producer.flush(60)
-        except KafkaProducer.KafkaTimeoutError , e:
+        except KafkaProducer.KafkaTimeoutError as e:
             print ("cant send the message", e)
