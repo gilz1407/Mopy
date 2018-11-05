@@ -8,7 +8,7 @@ def MyCare(tup):
 
 def redisTest():
     r = redis.Redis()   # Connecting to localhost redis server.
-    client = Listener(r, ['test', 'test2'],MyCare)  # Create a listener for number of channels on sperate thread.
+    client = Listener(r, ['VideoUploaded'],MyCare)  # Create a listener for number of channels on sperate thread.
     client.start()  # Start listening.
 
     # Publish different data on number of channels.

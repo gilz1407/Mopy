@@ -2,15 +2,12 @@ import os
 from datetime import time
 from random import random
 
-import httplib2
-from googleapiclient import http
+import redis
 from googleapiclient.errors import HttpError
 from googleapiclient.http import MediaFileUpload
-
-from AuthenticatedService import get_authenticated_service
-from Channel import RETRIABLE_EXCEPTIONS, RETRIABLE_STATUS_CODES
-from Helper import build_resource, print_response
-
+from YouTubeDemo.AuthenticatedService import get_authenticated_service
+from YouTubeDemo.Channel import RETRIABLE_STATUS_CODES, RETRIABLE_EXCEPTIONS
+from YouTubeDemo.Helper import build_resource, print_response
 
 class Video:
     def __init__(self):
@@ -64,7 +61,9 @@ class Video:
         # See full sample for function
         return self.resumable_upload(request, 'video', 'insert')
 
+    # Upload new video and publish the id of the uploaded video to redis.
     def UploadVideo(self,videoData):
+        r = redis.Redis()  # Connecting to localhost redis server.
         media_file = videoData["fileName"]#'sample_video.flv'
         if not os.path.exists(media_file):
             exit('Please specify a valid file location.')
@@ -77,11 +76,13 @@ class Video:
                        'snippet.title': videoData["title"],#'Test video upload',
                        'status.embeddable': '',
                        'status.license': '',
-                       'status.privacyStatus': 'private',#videoData["private"]
+                       'status.privacyStatus': 'public',#videoData["private"]
                        'status.publicStatsViewable': ''},
                       media_file,
                       part='snippet,status')
-        return "{", "AddedVideo:",res['id'], "}"
+
+        r.publish("VideoUploaded",{"AddedVideo":res['id'],"title":videoData["title"]})
+        return {"AddedVideo:":res['id']}
 
     def videos_delete(self, **kwargs):
         # See full sample for function
