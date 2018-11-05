@@ -1,7 +1,8 @@
-from Connections.Rest.requests.ExampleRequest import ExampleRequest
+from Connections.Rest.requests.CreateNewPet import CreateNewPet
+from Connections.Rest.requests.GetPet import GetPet
 
 def RestExample():
-    er =ExampleRequest()
+    er = CreateNewPet()
 
     er.SetCategoryName("newCategory")
     er.SetId(12)
@@ -9,6 +10,11 @@ def RestExample():
     er.SetTagName("MyPets")
 
     res = er.Request()
-    print (res)
+    print(res)
+
+    er = GetPet()
+    er.SetPetId(12)
+    res = er.Request()
+    print(res.content)
 
 RestExample()
