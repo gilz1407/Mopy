@@ -22,9 +22,9 @@ def UploadVideo():
     assert(isMsgFound is True, "The expected video wasn't uploaded to youtube")
 
     # Verify on the ui that new video was uploaded
-    op = SeleniumOp()
-    op.openUrl("youTubePage")
-    
+op = SeleniumOp()
+op.openUrl("youTubePage")
+
 
 UploadVideo()
 
