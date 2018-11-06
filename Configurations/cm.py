@@ -9,8 +9,9 @@ class Singleton(type):
             cls._instances[cls] = super(Singleton, cls).__call__(*args, **kwargs)
         return cls._instances[cls]
 
+
 class Cm(metaclass=Singleton):
-    def __init__(self):
+    def __init__(self, configfilename="config.ini"):
         self.config=configparser.ConfigParser()
         dir_path = os.path.dirname(os.path.realpath(__file__))
-        self.config.read(dir_path+"/config.ini")
+        self.config.read(dir_path+"\\"+configfilename)

@@ -1,6 +1,8 @@
 import time
 import threading
 
+from Parsers.Json.JsonParser import JsonParser
+
 
 class Listener(threading.Thread):
     lstMessages = []
@@ -15,9 +17,12 @@ class Listener(threading.Thread):
     def run(self):
         global lstMessages
         for item in self.pubsub.listen():
-            Listener.lstMessages.append(item)
-            if self.callBack is not None:
-                self.callBack((item['channel'], item['data']))
+            if type(item["data"]) != int:
+                dataStr=item["data"].decode("utf-8").replace("'", '"')
+                dic = JsonParser().StringToDictionary(str(dataStr))
+                Listener.lstMessages.append(dic)
+                if self.callBack is not None:
+                    self.callBack((item['channel'], dic))
 
     def GetLastMessages(self):
         temp = Listener.lstMessages
