@@ -6,14 +6,14 @@ class VideoTabPage(SeleniumOp):
 
     def IsVideoExists(self, videoTitlename):
         videoContainer = self.driver.find_element_by_xpath(self.config["videoContainer"])
+        videoContainer = videoContainer.find_element_by_xpath(self.config["videoSubContainer"])
         videoElements = videoContainer.find_elements_by_xpath(self.config["videoElement"])
-        videoElement=[]
+        videoElement = []
         for ve in videoElements:
             details = ve.find_element_by_xpath(self.config["videoDetails"])
             title=details.find_element_by_xpath(self.config["videoTitle"])
             if title.text == videoTitlename:
                 videoElement.append(title)
                 videoElement.append(details)
-
         return videoElement
 

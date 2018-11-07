@@ -1,4 +1,4 @@
-from E2ETests.UiPages.VideoTabPage import VideoTabPage
+from tests.UiPages.VideoTabPage import VideoTabPage
 from UI.Selenium.SeleniumOp import SeleniumOp
 
 class MyChannelPage(SeleniumOp):

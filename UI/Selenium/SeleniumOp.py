@@ -16,4 +16,7 @@ class SeleniumOp():
     def openUrl(self,urlName):
         self.driver.get(self.config[urlName])
 
+    def closeBrowser(self):
+        self.driver.quit()
+
 
