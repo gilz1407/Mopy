@@ -1,3 +1,5 @@
+from gevent import time
+
 from Configurations.cm import Cm
 from selenium import webdriver
 
@@ -14,9 +16,13 @@ class SeleniumOp():
         self.driver.set_window_size(width,hight)
 
     def openUrl(self,urlName):
+        time.sleep(2)
         self.driver.get(self.config[urlName])
 
     def closeBrowser(self):
         self.driver.quit()
+
+    def openBrowser(self):
+        self.driver = webdriver.Chrome()
 
 

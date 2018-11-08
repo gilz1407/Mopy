@@ -1,23 +1,23 @@
 import logging
 import pytest
 import redis
+
+from Connections.Rest.requests.DeleteVideo import DeleteVideo
+from Connections.Rest.requests.UploadVideo import UploadVideo
 from Parsers.CSV.CsvParser import CsvParser
 from tests.UiPages.MyChannelPage import MyChannelPage
 from MessageBrokers.Redis.RedisManager import Listener
 from UI.Selenium.SeleniumOp import SeleniumOp
-from YouTubeDemo.Video import Video
 
-def setup_module(module):
-    global video
-    video = Video()
 
-def teardown_module(module):
-    pass
+#@pytest.mark.parametrize(
+#    'title,description,path',CsvParser("./tests/video_test_data.csv").GetDataDrivenFormat()
+#)
+def test_UploadVideo():
+    title="DataBases"
+    description="My first video"
+    path="C:/Users/GILTZ/Desktop/VideosToUpload/DataBases.mp4"
 
-@pytest.mark.parametrize(
-    'title,description,path',CsvParser("./tests/video_test_data.csv").GetDataDrivenFormat()
-)
-def UploadVideo(title,description,path):
     logging.info("Start \"UploadVideo\" test - "+title,description,path)
     channel='VideoUploaded'
 
@@ -28,9 +28,12 @@ def UploadVideo(title,description,path):
     logging.info("listening to \"UploadedVideo\" channel")
 
     logging.info("Start uploading video")
-    video.UploadVideo({"description":description,
-                       "title":title,
-                       "fileName":path})
+
+    uploadVideo=UploadVideo()
+    uploadVideo.SetDescription(description)
+    uploadVideo.SetFileName(path)
+    uploadVideo.SetTitle(title)
+    uploadVideo.Request()
 
     logging.info("Waiting for relevant message from redis")
     uploadedVideoIds = []
@@ -40,7 +43,7 @@ def UploadVideo(title,description,path):
         for msg in client.GetLastMessages():
             try:
                 if relevantField in msg:
-                    if msg[relevantField] == "UI Automation":
+                    if msg[relevantField] == "DataBases":
                         logging.info("Video was uploaded")
                         uploadedVideoIds.append(msg["AddedVideo"])
                         isMsgFound = True
@@ -60,8 +63,10 @@ def UploadVideo(title,description,path):
 
     logging.info("Delete the last uploaded video")
     # Delete all of the uploaded videos
+    deleteVideo=DeleteVideo()
     for videoitem in uploadedVideoIds:
-        video.videos_delete(id=videoitem)
+        deleteVideo.SetVideoId(videoitem)
+        deleteVideo.Request()
 
     logging.info("Checking on th UI that the video was deleted")
     op = SeleniumOp()
@@ -70,3 +75,4 @@ def UploadVideo(title,description,path):
     videoElement = filmPage.IsVideoExists("UI Automation")
     assert (videoElement == [], "The uploaded video wasn't found")
     op.closeBrowser()
+test_UploadVideo()

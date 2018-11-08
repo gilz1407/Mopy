@@ -1,39 +1,28 @@
 {
   "requests": [
     {
-      "name": "CreateNewPet",
+      "name": "UploadVideo",
       "type": "post",
-      "url": "https://petstore.swagger.io/v2/pet",
+      "url": "http://localhost:8080/Upload Video",
       "js": {
-        "id": 0,
-        "category": {
-          "id": 0,
-          "name": ""
-        },
-        "name": "",
-        "photoUrls": [
-          ""
-        ],
-        "tags": [
-          {
-            "id": 0,
-            "name": ""
-          }
-        ],
-        "status": "available"
+        "fileName":"",
+        "description":"",
+        "title":""
       },
       "data": "",
       "params":{},
       "apiParams":""
     },
     {
-      "name": "GetPet",
-      "type": "get",
-      "url": "https://petstore.swagger.io/v2/pet",
-      "js":{},
-      "data":"",
+      "name": "DeleteVideo",
+      "type": "post",
+      "url": "http://localhost:8080/Delete Video",
+      "js": {
+        "id":""
+      },
+      "data": "",
       "params":{},
-      "apiParams":"/3"
+      "apiParams":""
     }
   ]
 }
