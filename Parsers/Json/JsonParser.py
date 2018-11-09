@@ -1,7 +1,7 @@
 import json
 
 class JsonParser:
-    def __init__(self,fileName):
+    def __init__(self,fileName=None):
         self.fileName=fileName
 
     def FileToDictionary(self):

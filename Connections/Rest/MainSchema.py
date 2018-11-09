@@ -9,6 +9,8 @@ class RequestSchema(Schema):
         self.url = data["url"]
         self.js = data["js"]
         self.data = data["data"]
+        self.params=data["params"]
+        self.apiParams=data["apiParams"]
         self.dataItem = data
         self.rest=RestManager()
 
@@ -17,11 +19,13 @@ class RequestSchema(Schema):
     url = fields.Str()
     js = fields.Dict()
     data = fields.Str()
+    params = fields.Dict()
+    apiParams=fields.Str()
 
     @post_load
     def make_obj(self,data=None):
-        switcher = {
-                "post": self.rest.Post(self.dataItem),
-                "get": self.rest.Get(self.dataItem)
-            }
-        return switcher.get(self.type)
+        print("im in "+self.type)
+        if self.type == "post":
+            return self.rest.Post(self.dataItem)
+        elif self.type == "get":
+            return self.rest.Get(self.dataItem)

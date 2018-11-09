@@ -15,3 +15,11 @@ class CsvParser:
         for row in reader:
             col.append(row[colName])
         return list.sort(col,reverse=descending)
+
+    def GetDataDrivenFormat(self):
+        lst=self.GetCsvLinesAsList(',')
+        dd=[]
+        for index,item in enumerate(lst):
+            if index!=0:
+                dd.append((item[0],item[1],item[2]))
+        return dd

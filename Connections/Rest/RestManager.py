@@ -1,19 +1,19 @@
 import requests
 
 class RestManager():
-    def __init__(self,url=None):
+    def __init__(self, url=None):
         if url!=None:
-            self.url=url
+            self.url = url
 
-    def Post(self,data):
-        return requests.post(data["url"],json=data["js"])
+    def Post(self, data):
+        return requests.post(data["url"], json=data["js"])
 
-    def Get(self,data):
-        #PARAMS = {'address': location} - example
+    def Get(self, data):
+        data["url"] += data["apiParams"]
         return requests.get(data["url"], params=data["params"])
 
-    def Put(self,data):
+    def Put(self, data):
         pass
 
-    def Delete(self,data):
+    def Delete(self, dasta):
         pass
