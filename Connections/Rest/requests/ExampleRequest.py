@@ -18,3 +18,5 @@ class ExampleRequest(IRequests):
     def SetId(self,id):
         self.requestItem["js"]["id"] = id
         self.requestItem["js"]["tags"][0]["id"] = id
+
+
