@@ -5,8 +5,8 @@ import pytest
 from gevent import os
 import re
 
-availableTests={"hits":[]}
-parentFolder="../"
+availableTests = {"hits":[]}
+parentFolder = "../"
 
 def absoluteFilePaths(directory):
    for dirpath,_,filenames in os.walk(directory):
@@ -25,22 +25,22 @@ def post_testByName(TestName):
 def post_testByFolder(FolderName):
     _folderName=FolderName["folderName"]
     for path in absoluteFilePaths(_folderName):
-        m = re.search('\\\\(Test.*.py)', path)
-        if (m.group(0)!=None):
-            pytest.main(_folderName+m.group(0))
+        path=path.replace("\\","/")
+        m = re.search('(Test[a-z,A-Z,1-9]*.py)', path)
+        if (m!=None):
+            pytest.main(_folderName+"/"+m.group(0))
     return "The test was run",200
 
 def Get_availableTests(FolderName):
     _folderName = parentFolder + FolderName
     for path in absoluteFilePaths(_folderName):
-        before, after = path.split(FolderName)
-        parsedAfter = after.replace("\\", "/")
-        fileName = parsedAfter.split("/")[-1]
-        if (fileName.startswith("Test") and fileName.endswith("py")):
-            availableTests["hits"].append(_folderName + parsedAfter)
-    if availableTests["hits"] == []:
-        return ('The requested folder was not found',404)
-    return availableTests,200
+        path = path.replace("\\", "/")
+        m = re.search('(Test[a-z,A-Z,1-9]*.py)', path)
+        if m is not None:
+            availableTests["hits"].append(_folderName+"/"+m.group(0))
+    if not availableTests["hits"]:
+        return 'The requested folder was not found', 404
+    return availableTests, 200
 
 logging.basicConfig(level=logging.INFO)
 app = connexion.App(__name__)
