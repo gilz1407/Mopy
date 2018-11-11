@@ -1,0 +1,187 @@
+swagger: '2.0'
+info:
+  title: Test Api 
+  version: "0.1"
+  description: Simple example API for tests
+consumes:
+  - application/json
+produces:
+  - application/json
+
+paths:
+  /RunTestByFile:
+    post:
+      tags: [Tests]
+      operationId: app.post_testByFile
+      summary: Running pytest's tests by file name
+      parameters:
+        - name: TestFile
+          in: body
+          schema:
+            $ref: '#/definitions/TestFile'
+      responses:
+        200:
+          description: Return tests status
+          schema:
+            type: object
+            properties:
+              pets:
+                type: array
+                items:
+                  $ref: '#/definitions/TestFile'
+  /RunTestByMarkers:
+    post:
+      tags: [Tests]
+      operationId: app.post_testByMarks
+      summary: Running pytest's tests by file name and marker
+      parameters:
+        - name: Marker
+          in: body
+          schema:
+            $ref: '#/definitions/Marker'
+          in: body
+          schema:
+            $ref: '#/definitions/Marker'
+      responses:
+        200:
+          description: Return pets
+          schema:
+            type: object
+            properties:
+              pets:
+                type: array
+                items:
+                  $ref: '#/definitions/Marker'
+  /RunTestByName:
+    post:
+      tags: [Tests]
+      operationId: app.post_testByName
+      summary: Running pytest's tests by test name
+      parameters:
+        - name: TestName
+          in: body
+          schema:
+            $ref: '#/definitions/TestName'
+          in: body
+          schema:
+            $ref: '#/definitions/TestName'
+      responses:
+        200:
+          description: Return pets
+          schema:
+            type: object
+            properties:
+              pets:
+                type: array
+                items:
+                  $ref: '#/definitions/TestName'
+  /RunTestByFolder:
+    post:
+      tags: [Tests]
+      operationId: app.post_testByFolder
+      summary: Running pytest's tests by folder name
+      parameters:
+        - name: FolderName
+          in: body
+          schema:
+            $ref: '#/definitions/FolderName'
+      responses:
+        200:
+          description: Return folder list
+          schema:
+            $ref: '#/definitions/FolderList'
+  /GetTests/{FolderName}:
+    get:
+      tags: [GetTests]
+      operationId: app.Get_availableTests
+      summary: Get tests on the requested folder
+      parameters:
+        - $ref: '#/parameters/FolderName'
+      responses:
+        200:
+          description: Return tests list
+          schema:
+            $ref: '#/definitions/TestList'
+
+parameters:
+  FolderName:
+    name: FolderName
+    description: Pet's Unique identifier
+    in: path
+    type: string
+    required: true
+
+definitions:
+  TestFile:
+    type: object
+    required:
+      - fileName
+    properties:
+      fileName:
+        type: string
+        description: File Name
+        example: "/PyTestsEx/TestFileExample1.py"
+        minLength: 1
+        maxLength: 100
+  Marker:
+    type: object
+    required:
+      - fileName
+      - marker
+    properties:
+      fileName:
+        type: string
+        description: File Name
+        example: "/PyTestsEx/TestFileExample1.py"
+        minLength: 1
+        maxLength: 100
+      marker:
+        type: string
+        description: Marker Name
+        example: "low"
+        minLength: 1
+        maxLength: 100
+  TestName:
+    type: object
+    required:
+      - fileName
+      - testName
+    properties:
+      fileName:
+        type: string
+        description: File Name
+        example: "/PyTestsEx/TestFileExample1.py"
+        minLength: 1
+        maxLength: 100
+      testName:
+        type: string
+        description: Test Name
+        example: "test_subtraction"
+        minLength: 1
+        maxLength: 100
+  FolderName:
+    type: object
+    required:
+      - folderName
+    properties:
+      folderName:
+        type: string
+        description: Folder Name
+        example: "/PyTestsEx"
+        minLength: 1
+        maxLength: 100
+  TestList:
+    type: object
+  FolderList:
+    type: object
+    required:
+      - lst
+    properties:
+      lst:
+        type: array
+        description: Folder list
+        example: "/PyTestsEx"
+        items:
+          type: string
+
+
