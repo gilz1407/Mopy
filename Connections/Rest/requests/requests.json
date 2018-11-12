@@ -3,7 +3,7 @@
     {
       "name": "UploadVideo",
       "type": "post",
-      "url": "http://localhost:8080/Upload Video",
+      "url": "http://localhost:8081/Upload Video",
       "js": {
         "fileName":"",
         "description":"",
@@ -16,7 +16,7 @@
     {
       "name": "DeleteVideo",
       "type": "delete",
-      "url": "http://localhost:8080/Delete Video",
+      "url": "http://localhost:8081/Delete Video",
       "js": {
         "id":""
       },

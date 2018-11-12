@@ -14,7 +14,7 @@ def absoluteFilePaths(directory):
            yield os.path.abspath(os.path.join(dirpath, f))
 
 def post_testByFile(TestFile):
-    pytest.main([TestFile["fileName"],'-s'])
+    pytest.main([TestFile["fileName"],'-v','--log-file',TestFile["fileName"]+'.log'])
 
 def post_testByMarks(Marker):
     pytest.main([Marker["fileName"],'-v','-m',Marker["marker"]])
@@ -28,7 +28,7 @@ def post_testByFolder(FolderName):
         path=path.replace("\\","/")
         m = re.search('(Test[a-z,A-Z,1-9]*.py)', path)
         if (m!=None):
-            pytest.main(_folderName+"/"+m.group(0))
+            pytest.main([_folderName+"/"+m.group(0),'--log-file','../Logs/'+m.group(0)+'.log'])
     return "The test was run",200
 
 def Get_availableTests(FolderName):

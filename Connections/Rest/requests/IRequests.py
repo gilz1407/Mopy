@@ -4,7 +4,7 @@ from Connections.Rest.MainSchema import RequestSchema
 from Parsers.Json.JsonParser import JsonParser
 
 class IRequests:
-    def __init__(self):
+    def __init__(self,):
         self.isExists=False
         dir_path = os.path.dirname(os.path.realpath(__file__))
         queryFileDic = JsonParser(dir_path + "/requests.json").FileToDictionary()

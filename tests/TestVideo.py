@@ -18,7 +18,7 @@ from UI.Selenium.SeleniumOp import SeleniumOp
 
 def test_UploadVideo(title, description, path):
     #logging.getLogger()
-    logging.basicConfig(filename=str(inspect.stack()[0][3]) + '.log', level=logging.INFO)
+    logging.basicConfig(filename=os.path.join(os.path.dirname(__file__), 'mylogs'), level=logging.INFO)
     logging.info("Start \"UploadVideo\" test - " + title, description, path)
     channel = 'VideoUploaded'
 
@@ -59,9 +59,9 @@ def test_UploadVideo(title, description, path):
     op.openUrl("youTubeUrl")
 
     videoElement = []
-    maxTry = 5
+
     currTry = 0
-    while len(videoElement) == 0 and currTry < maxTry:
+    while len(videoElement) == 0 and currTry < 5:
         filmPage = MyChannelPage().GoToFilmTab()
         videoElement = filmPage.IsVideoExists(title)
         currTry += 1
@@ -80,11 +80,10 @@ def test_UploadVideo(title, description, path):
 
     op.openUrl("youTubeUrl")
 
-    maxTry = 5
     currTry = 0
     filmPage = MyChannelPage().GoToFilmTab()
     videoElement = filmPage.IsVideoExists(title)
-    while len(videoElement) > 0 and currTry < maxTry:
+    while len(videoElement) > 0 and currTry < 5:
         filmPage = MyChannelPage().GoToFilmTab()
         videoElement = filmPage.IsVideoExists(title)
         currTry += 1
