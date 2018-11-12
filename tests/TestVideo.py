@@ -13,11 +13,11 @@ from MessageBrokers.Redis.RedisManager import Listener
 from UI.Selenium.SeleniumOp import SeleniumOp
 
 @pytest.mark.parametrize(
-    'title,description,path', CsvParser("./tests/video_test_data.csv").GetDataDrivenFormat()
+    'title,description,path', CsvParser("../tests/video_test_data.csv").GetDataDrivenFormat()
 )
 
 def test_UploadVideo(title, description, path):
-    logging.getLogger()
+    #logging.getLogger()
     logging.basicConfig(filename=str(inspect.stack()[0][3]) + '.log', level=logging.INFO)
     logging.info("Start \"UploadVideo\" test - " + title, description, path)
     channel = 'VideoUploaded'

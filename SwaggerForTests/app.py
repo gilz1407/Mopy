@@ -14,7 +14,7 @@ def absoluteFilePaths(directory):
            yield os.path.abspath(os.path.join(dirpath, f))
 
 def post_testByFile(TestFile):
-    pytest.main([TestFile["fileName"]])
+    pytest.main([TestFile["fileName"],'-s'])
 
 def post_testByMarks(Marker):
     pytest.main([Marker["fileName"],'-v','-m',Marker["marker"]])
@@ -48,7 +48,6 @@ app.add_api('swagger.yaml')
 application = app.app
 
 if __name__ == '__main__':
-    #run our standalone gevent server
     app.run(port=8080, server='gevent')
 
 
