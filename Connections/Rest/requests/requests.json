@@ -15,7 +15,7 @@
     },
     {
       "name": "DeleteVideo",
-      "type": "post",
+      "type": "delete",
       "url": "http://localhost:8080/Delete Video",
       "js": {
         "id":""

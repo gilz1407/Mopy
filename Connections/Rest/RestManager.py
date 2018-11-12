@@ -1,3 +1,5 @@
+import json
+
 import requests
 
 class RestManager():
@@ -15,5 +17,6 @@ class RestManager():
     def Put(self, data):
         pass
 
-    def Delete(self, dasta):
-        pass
+    def Delete(self, data):
+        headers = {'content-type': 'application/json'}
+        return requests.delete(data["url"], data=json.dumps(data["js"]), headers=headers)
