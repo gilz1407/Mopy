@@ -1,3 +1,5 @@
+import subprocess
+
 from gevent import time
 
 from Configurations.cm import Cm
@@ -8,6 +10,7 @@ class SeleniumOp():
 
     def __init__(self,pageName='UiTesting',force=False):
         if SeleniumOp.driver is None or force==True:
+            subprocess.call("taskkill /IM chrome.exe")
             driverConfig=Cm().config["ChromeDriver"]
             options = webdriver.ChromeOptions()
             options.add_argument("--user-data-dir="+driverConfig["userDataDir"])
@@ -31,5 +34,7 @@ class SeleniumOp():
 
     def refreshPage(self):
         self.driver.refresh()
+
+SeleniumOp()
 
 
