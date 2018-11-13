@@ -1,7 +1,7 @@
+#import subprocess
 import subprocess
 
 from gevent import time
-
 from Configurations.cm import Cm
 from selenium import webdriver
 
@@ -11,7 +11,7 @@ class SeleniumOp():
     def __init__(self,pageName='UiTesting',force=False):
         if SeleniumOp.driver is None or force==True:
             subprocess.call("taskkill /IM chrome.exe")
-            driverConfig=Cm().config["ChromeDriver"]
+            driverConfig=Cm("Xpathmapping.ini").config["ChromeDriver"]
             options = webdriver.ChromeOptions()
             options.add_argument("--user-data-dir="+driverConfig["userDataDir"])
             if driverConfig["path"] == "":
@@ -20,7 +20,7 @@ class SeleniumOp():
                 self.driver = webdriver.Chrome(driverConfig["path"],options=options)
             SeleniumOp.driver = self.driver
             self.driver.maximize_window()
-        self.config = Cm("Xpathmapping.ini").config[pageName]
+        self.config = Cm().config[pageName]
 
     def resizeBrowserWindow(self,width,hight):
         self.driver.set_window_size(width,hight)
@@ -35,6 +35,5 @@ class SeleniumOp():
     def refreshPage(self):
         self.driver.refresh()
 
-SeleniumOp()
 
-
+#SeleniumOp()
