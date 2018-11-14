@@ -6,7 +6,11 @@ class Singleton(type):
     _instances = {}
     lastConfigfile=""
     def __call__(cls, *args, **kwargs):
-        if cls not in cls._instances or args[0]!=Singleton.lastConfigfile:
+        if len(args)==0:
+            newconfigfile=Singleton.lastConfigfile
+        else:
+            newconfigfile=args[0]
+        if cls not in cls._instances or newconfigfile!=Singleton.lastConfigfile:
             cls._instances[cls] = super(Singleton, cls).__call__(*args, **kwargs)
             Singleton.lastConfigfile=args[0]
         return cls._instances[cls]

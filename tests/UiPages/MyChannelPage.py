@@ -1,6 +1,7 @@
 import time
 
 from selenium.webdriver.common.by import By
+from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from tests.UiPages.VideoTabPage import VideoTabPage
@@ -17,5 +18,4 @@ class MyChannelPage(SeleniumOp):
         homePageTabContainer = self.driver.find_element_by_xpath(self.config["homePageTabContainer"])
         tabs = homePageTabContainer.find_elements_by_xpath(self.config["homePageTabs"])
         tabs[self.tablist.index("Films")].click()
-        time.sleep(2)
         return VideoTabPage()

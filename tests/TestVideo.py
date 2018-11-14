@@ -58,6 +58,7 @@ def test_UploadVideo(title, description, path):
     op = SeleniumOp(force=True)
     op.openUrl("youTubeUrl")
 
+
     videoElement = []
 
     currTry = 0
