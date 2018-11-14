@@ -1,6 +1,6 @@
 swagger: '2.0'
 info:
-  title: Test Api 
+  title: Test Api
   version: "0.1"
   description: Simple example API for tests
 consumes:
@@ -21,9 +21,14 @@ paths:
             $ref: '#/definitions/TestFile'
       responses:
         200:
-          description: Return tests status (TBD)
+          description: Return tests status
           schema:
-            $ref: '#/definitions/TestFile'
+            type: object
+            properties:
+              pets:
+                type: array
+                items:
+                  $ref: '#/definitions/TestFile'
   /RunTestByMarkers:
     post:
       tags: [Tests]
@@ -41,7 +46,12 @@ paths:
         200:
           description: Return pets
           schema:
-            $ref: '#/definitions/Marker'
+            type: object
+            properties:
+              pets:
+                type: array
+                items:
+                  $ref: '#/definitions/Marker'
   /RunTestByName:
     post:
       tags: [Tests]
@@ -57,9 +67,14 @@ paths:
             $ref: '#/definitions/TestName'
       responses:
         200:
-          description: Run Test By Name
+          description: Return pets
           schema:
-            $ref: '#/definitions/TestName'
+            type: object
+            properties:
+              pets:
+                type: array
+                items:
+                  $ref: '#/definitions/TestName'
   /RunTestByFolder:
     post:
       tags: [Tests]
@@ -91,7 +106,7 @@ paths:
 parameters:
   FolderName:
     name: FolderName
-    description: Search for tests on selecte folder
+    description: Pet's Unique identifier
     in: path
     type: string
     required: true
@@ -105,7 +120,7 @@ definitions:
       fileName:
         type: string
         description: File Name
-        example: "../PyTestsEx/TestFileExample1.py"
+        example: "/PyTestsEx/TestFileExample1.py"
         minLength: 1
         maxLength: 100
   Marker:
@@ -117,7 +132,7 @@ definitions:
       fileName:
         type: string
         description: File Name
-        example: "../PyTestsEx/TestFileExample1.py"
+        example: "/PyTestsEx/TestFileExample1.py"
         minLength: 1
         maxLength: 100
       marker:
@@ -135,7 +150,7 @@ definitions:
       fileName:
         type: string
         description: File Name
-        example: "../PyTestsEx/TestFileExample1.py"
+        example: "/PyTestsEx/TestFileExample1.py"
         minLength: 1
         maxLength: 100
       testName:
@@ -152,7 +167,7 @@ definitions:
       folderName:
         type: string
         description: Folder Name
-        example: "../PyTestsEx"
+        example: "/PyTestsEx"
         minLength: 1
         maxLength: 100
   TestList:
@@ -165,8 +180,6 @@ definitions:
       lst:
         type: array
         description: Folder list
-        example: "../PyTestsEx"
+        example: "/PyTestsEx"
         items:
           type: string
-
-

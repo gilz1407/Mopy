@@ -35,12 +35,15 @@ def Get_availableTests(FolderName):
     _folderName = parentFolder + FolderName
     for path in absoluteFilePaths(_folderName):
         path = path.replace("\\", "/")
-        m = re.search('(Test[a-z,A-Z,1-9]*.py)', path)
+
+
         if m is not None:
             availableTests["hits"].append(_folderName+"/"+m.group(0))
-    if not availableTests["hits"]:
-        return 'The requested folder was not found', 404
-    return availableTests, 200
+    ######## return value #############
+
+
+
+    ####################################
 
 logging.basicConfig(level=logging.INFO)
 app = connexion.App(__name__)
