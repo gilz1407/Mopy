@@ -75,26 +75,17 @@ paths:
           description: Return folder list
           schema:
             $ref: '#/definitions/FolderList'
-  /GetTests/{FolderName}:
-    get:
-      tags: [GetTests]
-      operationId: app.Get_availableTests
-      summary: Get tests on the requested folder
-      parameters:
-        - $ref: '#/parameters/FolderName'
-      responses:
-        200:
-          description: Return tests list
-          schema:
-            $ref: '#/definitions/TestList'
 
-parameters:
-  FolderName:
-    name: FolderName
-    description: Search for tests on selecte folder
-    in: path
-    type: string
-    required: true
+
+
+
+
+
+
+
+
+
+
 
 definitions:
   TestFile:
