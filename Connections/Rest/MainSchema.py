@@ -29,3 +29,5 @@ class RequestSchema(Schema):
             return self.rest.Post(self.dataItem)
         elif self.type == "get":
             return self.rest.Get(self.dataItem)
+        elif self.type == "delete":
+            return self.rest.Delete(self.dataItem)

@@ -10,6 +10,15 @@ class ElasticOp():
     def GeneralQuery(self, query):
         return self.es.search(index=self.index, body=query)
 
+    def CreateIndex(self,indexName,number_of_shards=1,number_of_replicas=0):
+        request_body = {
+            "settings": {
+                "number_of_shards": number_of_shards,
+                "number_of_replicas": number_of_replicas
+            }
+        }
+        return self.es.create(index=indexName,body=request_body)
+
 
 
 
