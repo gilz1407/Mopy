@@ -4,9 +4,11 @@ from gevent import os
 
 class Singleton(type):
     _instances = {}
+    lastConfigfile=""
     def __call__(cls, *args, **kwargs):
-        if cls not in cls._instances:
+        if cls not in cls._instances or args[0]!=Singleton.lastConfigfile:
             cls._instances[cls] = super(Singleton, cls).__call__(*args, **kwargs)
+            Singleton.lastConfigfile=args[0]
         return cls._instances[cls]
 
 
