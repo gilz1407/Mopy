@@ -2,11 +2,12 @@ import paramiko
 from Configurations.cm import Cm
 
 class SSHConnection:
+
     def __init__(self,userName,password,host):
         self.username=userName
         self.password=password
         self.host=host
-        self.nbytes=int(Cm('config.ini').config["SSH"]["maxSize"])
+        self.nbytes = int(Cm('config.ini').config["SSH"]["maxSize"])
         self.port=22
 
     def TransferFile(self,source,destenation):
@@ -20,7 +21,7 @@ class SSHConnection:
         ssh.close()
 
     def SendCommand(self,command):
-        client = paramiko.Transport((self.host,self.port))
+        client = paramiko.Transport(self.host,self.port)
         paramiko.SSHConfig()
         client.connect(username=self.username, password=self.password)
         stdout_data = []
