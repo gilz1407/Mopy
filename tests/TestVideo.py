@@ -17,7 +17,6 @@ from UI.Selenium.SeleniumOp import SeleniumOp
 )
 
 def test_UploadVideo(title, description, path):
-    #logging.getLogger()
     logging.basicConfig(filename=os.path.join(os.path.dirname(__file__), 'mylogs'), level=logging.INFO)
     logging.info("Start \"UploadVideo\" test - " + title, description, path)
     channel = 'VideoUploaded'
