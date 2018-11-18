@@ -5,7 +5,7 @@ import pytest
 from gevent import os
 import re
 
-availableTests = {"hits":[]}
+
 parentFolder = "../"
 
 def absoluteFilePaths(directory):
@@ -32,18 +32,18 @@ def post_testByFolder(FolderName):
     return "The test was run",200
 
 def Get_availableTests(FolderName):
+    availableTests = {"hits": []}
     _folderName = parentFolder + FolderName
     for path in absoluteFilePaths(_folderName):
         path = path.replace("\\", "/")
-
-
+        m=re.search('(Test[a-z,A-Z,0-9]*.py)',path)
         if m is not None:
             availableTests["hits"].append(_folderName+"/"+m.group(0))
-    ######## return value #############
 
-
-
-    ####################################
+    if not availableTests['hits']:
+        return "No tests were found",404
+    else:
+        return availableTests,200
 
 logging.basicConfig(level=logging.INFO)
 app = connexion.App(__name__)

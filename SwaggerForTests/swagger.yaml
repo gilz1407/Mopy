@@ -75,17 +75,27 @@ paths:
           description: Return folder list
           schema:
             $ref: '#/definitions/FolderList'
+  /GetTests/{FolderName}:
+    get:
+      tags: [Get Tests]
+      operationId: app.Get_availableTests
+      summary: Running pytest's tests by folder name
+      parameters:
+        - $ref: '#/parameters/FolderName'
+      responses:
+        200:
+          description: Wow!!
+          schema:
+            $ref: '#/definitions/TestList'
 
 
-
-
-
-
-
-
-
-
-
+parameters:
+  FolderName:
+    name: FolderName
+    description: folder name
+    in: path
+    type: string
+    required: true
 
 definitions:
   TestFile:
