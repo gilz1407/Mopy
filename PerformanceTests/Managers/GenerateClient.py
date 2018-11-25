@@ -1,4 +1,6 @@
 from locust import Locust, events
+
+from PerformanceTests.Handlers.CsvHandler import success, fail
 from PerformanceTests.Managers.DataDriven import DataDriven
 
 
@@ -12,10 +14,11 @@ class GenerateClient(Locust):
         module = getattr(client, clientName)
         cs=getattr(module,clientName)
         self.client=cs(self.host)
+        self.SubscribeEvents()
 
-    def SubscribeEvents(self,failFunc,successFunc):
-        events.request_failure += failFunc
-        events.request_success += successFunc
+    def SubscribeEvents(self):
+        events.request_failure += fail
+        events.request_success += success
 
 
 

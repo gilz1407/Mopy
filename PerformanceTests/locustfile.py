@@ -7,13 +7,6 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')
 from PerformanceTests.Managers.DataDriven import DataDriven
 from PerformanceTests.Managers.GenerateClient import GenerateClient
 
-
-def writeToCsv_success(**kwargs):
-    print("ToCSV_success")
-
-def writeToCsv_fail(**kwargs):
-    print("ToCSV_fail")
-
 class ProtocolTasks1(TaskSequence):
     @seq_task(1)
     def MyThirdTask(self):
@@ -29,7 +22,6 @@ class ProtocolTasks1(TaskSequence):
 class ProtocolTasks2(TaskSet):
     @task
     def MyFirstTask(self):
-
         self.client.new_connection()
         str = DataDriven().Get()
         self.client.publish("Publish to redis-"+str['first name'])
@@ -41,7 +33,6 @@ class ProtocolTasks2(TaskSet):
 
 class ProtocolUser(GenerateClient):
     def __init__(self):
-        print("Start")
         super(ProtocolUser,self).__init__("RedisClient","names.csv")
     task_set = ProtocolTasks1
     host = 'localhost:8000'
@@ -50,8 +41,8 @@ class ProtocolUser(GenerateClient):
 
 class ProtocolUser1(GenerateClient):
     def __init__(self):
-        print("Start")
         super(ProtocolUser1,self).__init__("RedisClient","names.csv")
+
     host = 'localhost:8000'
     task_set = ProtocolTasks2
     min_wait = 0

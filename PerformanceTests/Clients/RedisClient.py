@@ -24,7 +24,7 @@ class RedisClient:
     def publish(self, set):
         print("uploading: " + set)
         time.sleep(2)
-        return True
+        return None
 
     def close_connection(self):
         print("connection closed")
