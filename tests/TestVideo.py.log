@@ -1,0 +1,10 @@
+TestVideo.py                24 INFO     Start subscribing to "UploadedVideo" channel
+TestVideo.py                28 INFO     listening to "UploadedVideo" channel
+TestVideo.py                30 INFO     Start uploading video
+TestVideo.py                38 INFO     Waiting for relevant message from redis
+TestVideo.py                47 INFO     Video was uploaded
+TestVideo.py                24 INFO     Start subscribing to "UploadedVideo" channel
+TestVideo.py                28 INFO     listening to "UploadedVideo" channel
+TestVideo.py                30 INFO     Start uploading video
+TestVideo.py                38 INFO     Waiting for relevant message from redis
+TestVideo.py                47 INFO     Video was uploaded
