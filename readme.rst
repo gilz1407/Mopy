@@ -4,7 +4,7 @@ Test API
 ----------
 
 Description:
--------------
+------------
 This API lets you running your tests according to multiple filters:
 	
 	1. By file name - Running all of the tests on the specify file.
