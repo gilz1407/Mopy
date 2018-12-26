@@ -10,7 +10,7 @@ class RedisClient:
         self.port = int(host[1])
 
     @stopwatch
-    def CheckQueue(self,str):
+    def CheckQueue(self, str):
         print(str)
         time.sleep(1)
         return True

@@ -14,6 +14,7 @@ def stopwatch(func):
         result = None
         try:
             result = func(*args, **kwargs)
+            print ("result:",result)
         except Exception as e:
             total = int((time.time() - start) * 1000)
             events.request_failure.fire(request_type="TYPE",

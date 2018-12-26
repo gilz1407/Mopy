@@ -14,6 +14,7 @@ class ProtocolTasks1(TaskSequence):
         print("seq 1")
         self.client.CheckQueue(str["first name"])
 
+
     @seq_task(2)
     def MyFourTask(self):
         print("seq 2")
