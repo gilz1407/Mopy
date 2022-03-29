@@ -19,4 +19,4 @@ redis==2.10.6
 requests==2.20.0
 selenium==3.141.0
 swagger-ui-bundle==0.0.2
-paramiko==2.4.2
+paramiko==2.10.1
